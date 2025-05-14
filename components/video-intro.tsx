@@ -27,7 +27,7 @@ export function VideoIntro({ onEnded, onSkip }: VideoIntroProps) {
     <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
       {/* Video de YouTube */}
       <iframe
-        src="https://www.youtube.com/embed/e6USefh4A4A?start=42&autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0"
+        src="https://www.youtube.com/embed/e6USefh4A4A?start=42&autoplay=0&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0"
         className="w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

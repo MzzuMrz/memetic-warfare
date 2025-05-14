@@ -1,35 +1,35 @@
-"use client"
+"use client";
 
-import React from "react"
-import { useState, useEffect, useRef } from "react"
-import { AnimatePresence, motion } from "framer-motion"
-import { ModeToggle } from "@/components/mode-toggle"
-import { ViewToggle } from "@/components/view-toggle"
-import { SlideNavigation } from "@/components/slide-navigation"
-import { BackgroundAnimation } from "@/components/background-animation"
-import { useMobile } from "@/hooks/use-mobile"
+import React from "react";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ViewToggle } from "@/components/view-toggle";
+import { SlideNavigation } from "@/components/slide-navigation";
+import { BackgroundAnimation } from "@/components/background-animation";
+import { useMobile } from "@/hooks/use-mobile";
 
 // Import all slide components
-import { TitleSlide } from "@/components/slides/title-slide"
-import { AttentionEconomy } from "@/components/slides/attention-economy"
-import { MemeDefinition } from "@/components/slides/meme-definition"
-import { MemesAsMycelia } from "@/components/slides/memes-as-mycelia"
-import { InformationSnacks } from "@/components/slides/information-snacks"
-import { LawsOfContagion } from "@/components/slides/laws-of-contagion"
-import { MemeticSaturation } from "@/components/slides/memetic-saturation"
-import { AdvancedInfection } from "@/components/slides/advanced-infection"
-import { MemeticCountermeasures } from "@/components/slides/memetic-countermeasures"
-import { PersonalExperience } from "@/components/slides/personal-experience"
-import { LlaoLlaoProject } from "@/components/slides/llao-llao-project"
-import { FinalReminder } from "@/components/slides/final-reminder"
-import { SchemaView } from "@/components/schema-view"
+import { TitleSlide } from "@/components/slides/title-slide";
+import { AttentionEconomy } from "@/components/slides/attention-economy";
+import { MemeDefinition } from "@/components/slides/meme-definition";
+import { MemesAsMycelia } from "@/components/slides/memes-as-mycelia";
+import { InformationSnacks } from "@/components/slides/information-snacks";
+import { LawsOfContagion } from "@/components/slides/laws-of-contagion";
+import { MemeticSaturation } from "@/components/slides/memetic-saturation";
+import { AdvancedInfection } from "@/components/slides/advanced-infection";
+import { MemeticCountermeasures } from "@/components/slides/memetic-countermeasures";
+import { PersonalExperience } from "@/components/slides/personal-experience";
+import { LlaoLlaoProject } from "@/components/slides/llao-llao-project";
+import { FinalReminder } from "@/components/slides/final-reminder";
+import { SchemaView } from "@/components/schema-view";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState(0)
-  const [view, setView] = useState<"narrative" | "schema">("narrative")
-  const [showIntro, setShowIntro] = useState(true)
-  const isMobile = useMobile()
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [activeSection, setActiveSection] = useState(0);
+  const [view, setView] = useState<"narrative" | "schema">("narrative");
+  const [showIntro, setShowIntro] = useState(true);
+  const isMobile = useMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const slides = [
     { id: "title", component: TitleSlide },
@@ -44,56 +44,56 @@ export default function Home() {
     { id: "personal-experience", component: PersonalExperience },
     { id: "llao-llao-project", component: LlaoLlaoProject },
     { id: "final-reminder", component: FinalReminder },
-  ]
+  ];
 
   const handleNext = () => {
     if (activeSection < slides.length - 1) {
-      setActiveSection(activeSection + 1)
+      setActiveSection(activeSection + 1);
     }
-  }
+  };
 
   const handlePrev = () => {
     if (activeSection > 0) {
-      setActiveSection(activeSection - 1)
+      setActiveSection(activeSection - 1);
     }
-  }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        handleNext()
+        handleNext();
       } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-        handlePrev()
+        handlePrev();
       } else if (e.key === "Escape") {
-        setShowIntro(false)
+        setShowIntro(false);
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [activeSection])
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeSection]);
 
   // Temporizador para mostrar el video por exactamente 1:18 (78 segundos)
   useEffect(() => {
     if (showIntro) {
-      console.log("Video iniciado, se detendrá en 1:18 (78 segundos)")
+      console.log("Video iniciado, se detendrá en 1:18 (78 segundos)");
 
       // Ajustado a exactamente 78 segundos (1:18)
       const timer = setTimeout(() => {
-        console.log("Tiempo alcanzado: 1:18 - Cambiando a la presentación")
-        setShowIntro(false)
-      }, 78000) // 78 segundos = 1:18
+        console.log("Tiempo alcanzado: 1:18 - Cambiando a la presentación");
+        setShowIntro(false);
+      }, 78000); // 78 segundos = 1:18
 
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [showIntro])
+  }, [showIntro]);
 
   // Si estamos mostrando la intro, mostrar solo el iframe de YouTube
   if (showIntro) {
     return (
       <div className="fixed inset-0 bg-black z-50">
         <iframe
-          src="https://www.youtube.com/embed/e6USefh4A4A?start=42&autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0"
+          src="https://www.youtube.com/embed/e6USefh4A4A?start=42&end=78&autoplay=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0"
           className="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -121,7 +121,7 @@ export default function Home() {
           </svg>
         </button>
       </div>
-    )
+    );
   }
 
   // Si no estamos mostrando la intro, mostrar la presentación normal
@@ -149,7 +149,9 @@ export default function Home() {
               <div className="h-screen w-full flex flex-col">
                 <div className="flex-1 overflow-hidden py-8 px-4 md:px-8">
                   <div className="container mx-auto h-full flex items-center justify-center">
-                    {React.createElement(slides[activeSection].component, { onNext: handleNext })}
+                    {React.createElement(slides[activeSection].component, {
+                      onNext: handleNext,
+                    })}
                   </div>
                 </div>
 
@@ -171,10 +173,13 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="container mx-auto px-4 py-16 h-screen"
           >
-            <SchemaView activeSection={activeSection} setActiveSection={setActiveSection} />
+            <SchemaView
+              activeSection={activeSection}
+              setActiveSection={setActiveSection}
+            />
           </motion.div>
         )}
       </AnimatePresence>
     </main>
-  )
+  );
 }
