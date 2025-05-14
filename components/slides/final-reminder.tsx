@@ -76,7 +76,7 @@ export function FinalReminder({ onNext }: FinalReminderProps) {
         <div className="bg-black/40 backdrop-blur-sm rounded-lg border border-emerald-500/20 p-6 flex flex-col items-center md:items-start">
           <h3 className="text-xl font-bold text-emerald-400 mb-3">Additional Resources</h3>
           <div className="flex flex-col items-center">
-            <img src="/images/qr.png" alt="QR code" className="w-36 h-36 mb-2" />
+            <img src="/images/qr.png" alt="QR code" className="w-40 h-40 mb-2" />
             <p className="text-sm text-center text-muted-foreground">Scan for various related content and resources</p>
           </div>
         </div>
